@@ -3,77 +3,57 @@
 #### Table of Contents
 
 1. [Overview](#overview)
-2. [Module Description - What the module does and why it is useful](#module-description)
-3. [Setup - The basics of getting started with speedtest](#setup)
-    * [What speedtest affects](#what-speedtest-affects)
-    * [Setup requirements](#setup-requirements)
-    * [Beginning with speedtest](#beginning-with-speedtest)
-4. [Usage - Configuration options and additional functionality](#usage)
-5. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
-5. [Limitations - OS compatibility, etc.](#limitations)
-6. [Development - Guide for contributing to the module](#development)
+2. [Usage - Configuration options and additional functionality](#usage)
+3. [Limitations - OS compatibility, etc.](#limitations)
+4. [Development - Guide for contributing to the module](#development)
 
 ## Overview
 
-A one-maybe-two sentence summary of what the module does/what problem it solves.
-This is your 30 second elevator pitch for your module. Consider including
-OS/Puppet version it works with.
+This module installs [Ookla Speedtest Mini](http://www.speedtest.net/mini.php).
 
-## Module Description
+Speedtest Mini is free but not freely redistributable and therefore cannot be
+included with this module. To obtain Speedtest Mini, you will need to create
+an account with Ookla and download `mini.zip` from their website. This module
+will then use `mini.zip` to install and configure Speedtest Mini.
 
-If applicable, this section should have a brief description of the technology
-the module integrates with and what that integration enables. This section
-should answer the questions: "What does this module *do*?" and "Why would I use
-it?"
-
-If your module has a range of functionality (installation, configuration,
-management, etc.) this is the time to mention it.
-
-## Setup
-
-### What speedtest affects
-
-* A list of files, packages, services, or operations that the module will alter,
-  impact, or execute on the system it's installed on.
-* This is a great place to stick any warnings.
-* Can be in list or paragraph form.
-
-### Setup Requirements **OPTIONAL**
-
-If your module requires anything extra before setting up (pluginsync enabled,
-etc.), mention it here.
-
-### Beginning with speedtest
-
-The very basic steps needed for a user to get the module up and running.
-
-If your most recent release breaks compatibility or requires particular steps
-for upgrading, you may wish to include an additional section here: Upgrading
-(For an example, see http://forge.puppetlabs.com/puppetlabs/firewall).
+This module relies on `puppetlabs/apache` to handle the web server and on
+`puppetlabs/firewall` to install the optional firewall rule.
 
 ## Usage
 
-Put the classes, types, and resources for customizing, configuring, and doing
-the fancy stuff with your module here.
+It is recommended that you use a wrapper class to call the `speedtest` class.
+This wrapper class should hold your copy of `mini.zip` and present it to
+`speedtest`.
 
-## Reference
+```puppet
+class site_speedtest {
+  class { 'speedtest':
+    source   => 'puppet:///modules/site_speedtest/mini.zip',
+    webroot  => '/var/www/speedtest',
+    vhost    => 'speedtest.example.com',
+    firewall => true,
+  }
+}
+```
 
-Here, list the classes, types, providers, facts, etc contained in your module.
-This section should include all of the under-the-hood workings of your module so
-people know what the module is touching on their system but don't need to mess
-with things. (We are working on automating this section!)
+### `source`
+Path to `mini.zip` using the Puppet fileserver. Required.
+
+### `webroot`
+Path to the web root on your system. Optional, defaults to `/var/www/speedtest`.
+
+### `vhost`
+Domain name from which Speedtest Mini should be served. Optional, defaults to `$::fqdn`
+
+### `firewall`
+Whether to make a firewall exception on port 80. Optional, defaults to `false`
 
 ## Limitations
 
-This is where you list OS compatibility, version compatibility, etc.
+This module was written for use with CentOS 6. It has not been tested on any other
+platforms but it ought to work pretty much anywhere that supports Apache. Please
+let me know if it works on other distributions.
 
 ## Development
 
-Since your module is awesome, other users will want to play with it. Let them
-know what the ground rules for contributing are.
-
-## Release Notes/Contributors/Etc **Optional**
-
-If you aren't using changelog, put your release notes here (though you should
-consider using changelog). You may also add any additional sections you feel are
-necessary or important to include here. Please use the `## ` header.
+Feel free to send issues and pull requests to improve this simple module.
