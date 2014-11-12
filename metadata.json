@@ -1,0 +1,14 @@
+{
+  "name": "jgazeley/speedtest",
+  "version": "0.1.0",
+  "author": "jgazeley",
+  "summary": "Install Ookla SpeedTest Mini on Linux",
+  "license": "Apache 2.0",
+  "source": "https://github.com/djjudas21/puppet-speedtest",
+  "project_page": "https://github.com/djjudas21/puppet-speedtest",
+  "issues_url": "https://github.com/djjudas21/puppet-speedtest/issues",
+  "dependencies": [
+    {"version_requirement":">= 1.0.0","name":"puppetlabs-stdlib"}
+  ]
+}
+
