@@ -33,6 +33,10 @@
     {
       "name": "puppetlabs/concat",
       "version_range": ">= 1.0.0"
+    },
+    {
+      "name": "maestrodev/wget",
+      "version_range": ">= 1.7.0"
     }
   ]
 }

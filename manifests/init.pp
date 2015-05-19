@@ -1,19 +1,34 @@
 # == Class: speedtest
 
 class speedtest (
-  $source,
+  $download = true,
+  $url = 'http://c.speedtest.net/mini/mini.zip',
+  $source = undef,
   $webroot = '/var/www/speedtest',
   $vhost = $::fqdn,
   $firewall = false,
 ) {
 
-  # Install zip file from source
-  file { 'mini.zip':
-    source => $source,
-    path   => "${webroot}/mini.zip",
-    notify => Exec['unzip'],
+  if ($download == true) {
+    # Grab zip file from Speedtest
+    wget::fetch { 'mini.zip':
+      source      => $url,
+      destination => "${webroot}/mini.zip",
+      timeout     => 0,
+      verbose     => false,
+      notify      => Exec['unzip'],
+      require     => File[$webroot],
+    }
+  } else {
+    # Install zip file from source
+    file { 'mini.zip':
+      source  => $source,
+      path    => "${webroot}/mini.zip",
+      notify  => Exec['unzip'],
+      require => File[$webroot],
+    }
   }
-  
+
   # Unzip the zip file
   exec { 'unzip':
     command     => 'unzip mini.zip',
