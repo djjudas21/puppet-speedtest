@@ -1,5 +1,10 @@
 2014-11-12 Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> - 0.1.0
 ===========================================================
 
- Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> (4):
+ Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
   * Initial release
+
+2015-05-19 Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> - 0.2.0
+
+ Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
+  * Add ability to download mini.zip directly from Ookla
