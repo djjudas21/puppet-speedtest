@@ -46,7 +46,7 @@ class speedtest (
   # Symlink the version
   file { "${webroot}/index.html":
     ensure => 'link',
-    target => 'index-php.html',
+    target => 'mini/index-php.html',
   }
 
   # Install the dependencies
