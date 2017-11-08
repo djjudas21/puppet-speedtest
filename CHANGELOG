@@ -5,6 +5,16 @@
   * Initial release
 
 2015-05-19 Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> - 0.2.0
+===========================================================
 
  Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
   * Add ability to download mini.zip directly from Ookla
+
+2017-11-08 Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk> - 0.2.1
+===========================================================
+
+ Jonathan Gazeley <jonathan.gazeley@bristol.ac.uk>:
+  * Fix bad symlink
+  * Add dependency on Apache for cleaner installation
+  * Fix up metadata
+
