@@ -39,7 +39,8 @@ class speedtest (
 
   # Create the webroot
   file { $webroot:
-    ensure => directory,
+    ensure  => directory,
+    require => Class['apache'],
   }
 
   # Symlink the version
